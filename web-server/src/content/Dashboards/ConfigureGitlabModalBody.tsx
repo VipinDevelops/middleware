@@ -47,8 +47,7 @@ export const ConfigureGitlabModalBody: FC<{
   );
 
   const checkDomainWithRegex = (domain: string) => {
-    const regex =
-      /^(https:\/\/)?[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*\.[a-zA-Z]{2,}(:[0-9]{1,5})?(\/.*)?$/;
+    const regex = /^(https?:\/\/)([\w-]+\.)+[\w-]+(\.[\w-]+)?$/;
     return regex.test(domain);
   };
 
@@ -79,7 +78,7 @@ export const ConfigureGitlabModalBody: FC<{
     }
 
     depFn(isLoading.true);
-    await checkGitLabValidity(token.value)
+    await checkGitLabValidity(token.value, customDomain.value)
       .then(async (res) => {
         return res;
       })
